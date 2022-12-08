@@ -40,3 +40,5 @@ app.listen(port, () =>
   console.log(`NodeJS Server listening on port ${port}. \nMode: ${process.env.NODE_ENV}`));
 
 module.exports = app;
+
+// ena sxolio
