@@ -1,5 +1,5 @@
 # This is a basic workflow that is manually triggered
-
+# workflow gia to CI kai to CD
 name: ci_cd
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI
