@@ -1,4 +1,7 @@
-name: ci
+# This is a basic workflow that is manually triggered
+# workflow gia to CI kai to CD
+
+name: ci_cd
 
 on: push
 
@@ -9,10 +12,10 @@ env:
   PLATFORM_URI: ${{ secrets.PLATFORM_URI }} 
   MONGODB_URI: ${{ secrets.MONGODB_URI }} 
 
-jobs:
-  ci:
+jobs: 
+  ci:  
     runs-on: ubuntu-latest
-    steps: 
+    steps:
       - name: Checkout repo
         uses: actions/checkout@v3
       - name: Install dependencies
@@ -36,3 +39,5 @@ jobs:
             git pull https://${{secrets.CLONE_TOKEN }}@github.com/SoftwareEngineering2-Assignment/se2-backend-group-8 main
             bash -ci 'npm install'
             bash -ci 'pm2 restart se2-backend-8'
+          
+
