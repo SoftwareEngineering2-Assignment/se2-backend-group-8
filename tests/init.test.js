@@ -28,7 +28,25 @@ test('GET /statistics returns correct response and status code', async (t) => {
 
 test('GET /sources returns correct response and status code', async (t) => {
   const token = jwtSign({id: 1});
-  const {statusCode} = await t.context.got(`sources/sources?token=${token}`);
+  const {body,statusCode} = await t.context.got(`sources/sources?token=${token}`);
+  t.is(statusCode, 200);
+});
+
+test('GET /dashboards returns correct response and status code', async (t) => {
+  // const token = JSON.stringify({
+  //   token: JSON.stringify(process.env.TEST_TOKEN),
+  //   user: JSON.stringify({
+  //       username: process.env.TEST_USERNAME,
+  //       id: process.env.TEST_ID,
+  //       email: process.env.TEST_EMAIL
+  //   }),
+  //   _persist: JSON.stringify({version: -1, rehydrated: true})
+  // });
+
+  const token = jwtSign({id: process.env.TEST_ID, username: process.env.TEST_USERNAME, email: process.env.TEST_EMAIL });
+
+  const {body, statusCode} = await t.context.got(`dashboards/dashboards?token=${token}`);
+  //t.is(body.name,'dummy')
   t.is(statusCode, 200);
 });
 
