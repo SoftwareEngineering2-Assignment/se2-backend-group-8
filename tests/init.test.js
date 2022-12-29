@@ -20,15 +20,32 @@ test.after.always((t) => {
 });
 
 test('GET /statistics returns correct response and status code', async (t) => {
-  const {body, statusCode} = await t.context.got('general/statistics');
+  const {body, statusCode} = await t.context.got('/general/statistics');
   t.is(body.sources, 0);
   t.assert(body.success);
   t.is(statusCode, 200);
 });
 
+//GET sources
 test('GET /sources returns correct response and status code', async (t) => {
   const token = jwtSign({id: 1});
-  const {statusCode} = await t.context.got(`sources/sources?token=${token}`);
+  const {statusCode} = await t.context.got(`/sources/sources?token=${token}`);
   t.is(statusCode, 200);
 });
+
+
+// GET testing URL
+test('GET /test-url returns correct status code', async (t) => {
+  const { body, statusCode } = await t.context.got(
+    '/general/test-url?url=https://www.youtube.com'
+  );
+  // Check if the return status is 200
+  t.is(statusCode, 200);
+});
+
+/na dw gia ta / sta urls
+
+
+
+
 
