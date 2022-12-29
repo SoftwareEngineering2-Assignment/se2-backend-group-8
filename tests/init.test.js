@@ -4,10 +4,13 @@ require('dotenv').config();
 const http = require('node:http');
 const test = require('ava').default;
 const got = require('got');
+const sinon = require('sinon');
 const listen = require('test-listen');
 
 const app = require('../src/index');
 const {jwtSign} = require('../src/utilities/authentication/helpers');
+
+
 
 test.before(async (t) => {
   t.context.server = http.createServer(app);
@@ -20,7 +23,7 @@ test.after.always((t) => {
 });
 
 test('GET /statistics returns correct response and status code', async (t) => {
-  const {body, statusCode} = await t.context.got('/general/statistics');
+  const {body, statusCode} = await t.context.got('general/statistics');
   t.is(body.sources, 0);
   t.assert(body.success);
   t.is(statusCode, 200);
@@ -29,20 +32,21 @@ test('GET /statistics returns correct response and status code', async (t) => {
 //GET sources
 test('GET /sources returns correct response and status code', async (t) => {
   const token = jwtSign({id: 1});
-  const {statusCode} = await t.context.got(`/sources/sources?token=${token}`);
+  const {statusCode} = await t.context.got(`sources/sources?token=${token}`);
   t.is(statusCode, 200);
 });
+
 
 
 // GET testing URL
 test('GET /test-url returns correct status code', async (t) => {
-  const { body, statusCode } = await t.context.got('/general/test-url?url=https://www.youtube.com');
+  const { body, statusCode } = await t.context.got('general/test-url?url=https://www.youtube.com');
   // Check if the return status is 200
   t.is(statusCode, 200);
 });
 
-// GET testing URL for error
-test('GET /test-url Returns 500 status and active: false on error', async (t, done) => {
+// GET test URL request for error
+test('GET /test-url returns 500 status and active: false on error', async (t, done) => {
   // Creating a stub method  of got,'get'
   const gotStub = sinon
     .stub(got, 'get')
@@ -54,7 +58,13 @@ test('GET /test-url Returns 500 status and active: false on error', async (t, do
   sinon.restore();
 });
 
-// na dw gia ta / sta urls
+// GET test URL request GET,POST,PUT
+test('GET /test-url-request Sends GET request and returns response', async (t) => {
+  // Send an HTTP GET request to the /test-url-request route
+  const { statusCode } = await t.context.got.get(
+    'general/test-url-request?url=https://www.google.gr&type=GET'
+  );
+
 
 
 
