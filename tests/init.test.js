@@ -43,10 +43,11 @@ test('GET /dashboards returns correct response and status code', async (t) => {
   //   _persist: JSON.stringify({version: -1, rehydrated: true})
   // });
 
-  const token = jwtSign({id: process.env.TEST_ID, username: process.env.TEST_USERNAME, email: process.env.TEST_EMAIL });
-
+  const token = jwtSign({username: process.env.TEST_USERNAME, id: process.env.TEST_ID,  email: process.env.TEST_EMAIL });
+  console.log(token)
   const {body, statusCode} = await t.context.got(`dashboards/dashboards?token=${token}`);
-  //t.is(body.name,'dummy')
+  // t.is(body.name,'dummy')
+  console.log(body)
   t.is(statusCode, 200);
 });
 
