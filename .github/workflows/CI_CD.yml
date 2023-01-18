@@ -11,6 +11,9 @@ env:
   SERVER_EMAIL: ${{ secrets.SERVER_EMAIL }} 
   PLATFORM_URI: ${{ secrets.PLATFORM_URI }} 
   MONGODB_URI: ${{ secrets.MONGODB_URI }} 
+  TEST_ID:  ${{ secrets.TEST_ID }} 
+  TEST_EMAIL: ${{ secrets.TEST_EMAIL }} 
+  TEST_USERNAME: ${{ secrets.TEST_USERNAME }} 
 
 jobs: 
   ci:  

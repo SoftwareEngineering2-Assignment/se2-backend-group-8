@@ -2,12 +2,13 @@
 require('dotenv').config();
 
 const http = require('node:http');
-const test = require('ava').default;
+const test = require('ava').serial;
 const got = require('got');
 const listen = require('test-listen');
 
 const app = require('../src/index');
 const {jwtSign} = require('../src/utilities/authentication/helpers');
+
 
 test.before(async (t) => {
   t.context.server = http.createServer(app);
@@ -28,7 +29,6 @@ test('GET /statistics returns correct response and status code', async (t) => {
 
 test('GET /sources returns correct response and status code', async (t) => {
   const token = jwtSign({id: 1});
-  const {statusCode} = await t.context.got(`sources/sources?token=${token}`);
+  const {body,statusCode} = await t.context.got(`sources/sources?token=${token}`);
   t.is(statusCode, 200);
 });
-
