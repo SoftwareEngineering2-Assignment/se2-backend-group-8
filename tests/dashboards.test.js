@@ -183,9 +183,6 @@ test('POST /check-password-needed when the dashboard doesn\'t require a password
 
 });
 
-//TODO check-password-needed if its shared
-//TODO check-password-needed if it needs password and is accessed by another user
-//TODO check-password-needed if it doesnt need password and is accessed by another user
 
 test('POST /check-password-needed when the dashboard doesn\'t require a password and is not shared and is accessed by the owner', async (t) => {
     
